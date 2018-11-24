@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: echo "Step 1.1"
+      - run: sleep 60s
   step-1-2:
     docker:
       - image: circleci/ruby:2.3.3-node-browsers
@@ -24,6 +25,7 @@ jobs:
     steps:
       - checkout
       - run: echo "Step 2.1"
+      - run: sleep 60s
   step-2-2:
     docker:
       - image: circleci/ruby:2.3.3-node-browsers
@@ -42,6 +44,7 @@ jobs:
     steps:
       - checkout
       - run: echo "Final step"
+      - run: sleep 60s
 
 workflows:
   version: 2
