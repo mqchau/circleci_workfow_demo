@@ -10,7 +10,7 @@ jobs:
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
-        entrypoint: ['dockerize', '-wait', 'tcp://127.0.0.1:3306', '-timeout 1m']
+        entrypoint: ['dockerize', '-wait', 'tcp://127.0.0.1:3306', '-timeout', '1m']
       - image: circleci/mysql:5.6
     steps:
       - run: echo "Step 1.1"
