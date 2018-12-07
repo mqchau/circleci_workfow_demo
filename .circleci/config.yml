@@ -10,7 +10,7 @@ jobs:
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
-        entrypoint: ['ip link show']
+        entrypoint: ['ip', 'link', 'show']
       - image: circleci/mysql:5.6
     steps:
       - checkout
