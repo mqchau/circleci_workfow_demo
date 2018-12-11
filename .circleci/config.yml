@@ -3,7 +3,6 @@ jobs:
   step-1-1:
     docker:
     - image: appfolio/messenger:master_14eb3339e48404e771090476a40e9dee1ec8a160_test
-      user: code
       auth:
         username: "$DOCKERHUB_USER"
         password: "$DOCKERHUB_PASSWORD"
@@ -12,6 +11,7 @@ jobs:
       - "--skip-performance-schema"
     - image: rabbitmq:3.6.12
     - image: memcached:1.4.21
+    working_directory: /home/code
     steps:
     - run:
         name: Wait for MySQL
