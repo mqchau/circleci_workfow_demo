@@ -28,11 +28,11 @@ jobs:
         environment:
           MULTIPLEXER_MAX_REQUESTS: 2
           MULTIPLEXER_URL: http://127.0.0.1:8085
-        command: bundle exec multiplexer_ctl run -e test -n tportal_test_multiplexer
+        command: mkdir -p log && bundle exec multiplexer_ctl run -e test -n tportal_test_multiplexer
     - run:
         name: puma server
         background: true
-        command: bundle exec puma -p 8085
+        command: bundle exec passenger start -e test -p 8085
     - run: sleep 60s
           
 
