@@ -5,7 +5,7 @@ jobs:
       - image: circleci/ruby:2.3.3-node-browsers
     steps:
       - run: 
-          shell: ruby
+          shell: ruby -e
           command: puts 'Hello world'
 
 workflows:
