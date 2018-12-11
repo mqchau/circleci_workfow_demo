@@ -33,7 +33,9 @@ jobs:
         name: puma server
         background: true
         command: bundle exec passenger start -e test -p 8085
-    - run: sleep 60s
+    - run:
+        name: Wait for passenger server
+        command: wait-for-it -h 127.0.0.1 -p 8085 -t 60
           
 
 workflows:
