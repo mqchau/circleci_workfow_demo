@@ -6,7 +6,7 @@ jobs:
     steps:
       - run: 
           shell: /usr/bin/env ruby
-          command: puts 'Hello world'
+          command: a = 1
 
 workflows:
   version: 2
