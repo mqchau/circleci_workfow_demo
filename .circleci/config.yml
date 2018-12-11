@@ -6,6 +6,16 @@ jobs:
       auth:
         username: "$DOCKERHUB_USER"
         password: "$DOCKERHUB_PASSWORD"
+    - image: appfolio/messenger:master_14eb3339e48404e771090476a40e9dee1ec8a160_integration_test
+      auth:
+        username: "$DOCKERHUB_USER"
+        password: "$DOCKERHUB_PASSWORD"
+        entrypoint: cd /home/code && bash start_app.sh
+    - image: appfolio/messenger:master_14eb3339e48404e771090476a40e9dee1ec8a160_integration_test
+      auth:
+        username: "$DOCKERHUB_USER"
+        password: "$DOCKERHUB_PASSWORD"
+        entrypoint: cd /home/code && bash start_multiplexer.sh
     - image: circleci/mysql:5.6
       command:
       - "--skip-performance-schema"
@@ -13,26 +23,26 @@ jobs:
     - image: memcached:1.4.21
     working_directory: /home/code
     steps:
-    - run:
-        name: Wait for MySQL
-        command: wait-for-it -h 127.0.0.1 -p 3306 -t 60
-    - run:
-        name: Wait for RabbitMQ
-        command: wait-for-it -h 127.0.0.1 -p 5672 -t 60
-    - run:
-        name: Wait for Memcached
-        command: wait-for-it -h 127.0.0.1 -p 11211 -t 60
-    - run:
-        name: Multiplexer in background
-        background: true
-        environment:
-          MULTIPLEXER_MAX_REQUESTS: 2
-          MULTIPLEXER_URL: http://127.0.0.1:8085
-        command: mkdir -p log && bundle exec multiplexer_ctl run -e test -n tportal_test_multiplexer
-    - run:
-        name: puma server
-        background: true
-        command: bundle exec passenger start -e test -p 8085
+    # - run:
+    #     name: Wait for MySQL
+    #     command: wait-for-it -h 127.0.0.1 -p 3306 -t 60
+    # - run:
+    #     name: Wait for RabbitMQ
+    #     command: wait-for-it -h 127.0.0.1 -p 5672 -t 60
+    # - run:
+    #     name: Wait for Memcached
+    #     command: wait-for-it -h 127.0.0.1 -p 11211 -t 60
+    # - run:
+    #     name: Multiplexer in background
+    #     background: true
+    #     environment:
+    #       MULTIPLEXER_MAX_REQUESTS: 2
+    #       MULTIPLEXER_URL: http://127.0.0.1:8085
+    #     command: mkdir -p log && bundle exec multiplexer_ctl run -e test -n tportal_test_multiplexer
+    # - run:
+    #     name: puma server
+    #     background: true
+    #     command: bundle exec passenger start -e test -p 8085
     - run:
         name: Wait for passenger server
         command: wait-for-it -h 127.0.0.1 -p 8085 -t 60
