@@ -2,11 +2,11 @@ version: 2
 jobs:
   step-1-1:
     docker:
-      - image: appfolio/messenger:master_14eb3339e48404e771090476a40e9dee1ec8a160_test
-        user: code
-        auth:
-          username: "$DOCKERHUB_USER"
-          password: "$DOCKERHUB_PASSWORD"
+    - image: appfolio/messenger:master_14eb3339e48404e771090476a40e9dee1ec8a160_test
+      user: code
+      auth:
+        username: "$DOCKERHUB_USER"
+        password: "$DOCKERHUB_PASSWORD"
     - image: circleci/mysql:5.6
       command:
       - "--skip-performance-schema"
