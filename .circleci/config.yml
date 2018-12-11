@@ -10,13 +10,13 @@ jobs:
       auth:
         username: "$DOCKERHUB_USER"
         password: "$DOCKERHUB_PASSWORD"
-      # entrypoint: cd /home/code && bash start_app.sh
+      entrypoint: cd /home/code && bash start_app.sh
       # entrypoint: ["cd", "/home/code", "&&", "bash", "start_app.sh"]
     - image: appfolio/messenger:master_14eb3339e48404e771090476a40e9dee1ec8a160_passenger_test
       auth:
         username: "$DOCKERHUB_USER"
         password: "$DOCKERHUB_PASSWORD"
-      # entrypoint: cd /home/code && bash start_multiplexer.sh
+      entrypoint: cd /home/code && bash start_multiplexer.sh
       # entrypoint: ["cd", "/home/code", "&&", "bash", "start_mutliplexer.sh"]
     - image: circleci/mysql:5.6
       command:
