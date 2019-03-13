@@ -9,7 +9,7 @@ jobs:
     working_directory: /root/repo
     steps:
     - run: echo "Something"
-    - run: circleci-agent step halt
+    # - run: circleci-agent step halt
     - run: echo "Something else"
           
 
