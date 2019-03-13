@@ -17,5 +17,4 @@ workflows:
   version: 2
   messenger_integration_test:
     jobs:
-      - messenger_integration_test:
-          context: appfolio_test_context2
+      - messenger_integration_test
