@@ -15,7 +15,7 @@ jobs:
           name: Triggering workflow 2 only
           command: |-
             curl -i \
-              -H "Circle-Token: $CIRCLECI_API_TOKEN"
+              -H "Circle-Token: $CIRCLECI_API_TOKEN" \
               -H 'Content-Type: application/json' \
               -H 'Accept: application/json' \
               -X POST \
