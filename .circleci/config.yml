@@ -33,8 +33,7 @@ workflows:
   workflow1:
     when: << pipeline.parameters.run_workflow1 >>
     jobs:
-      - trigger-workflow-2:
-          context: appfolio_test_context2
+      - trigger-workflow-2
   workflow2:
     when: << pipeline.parameters.run_workflow2 >>
     jobs:
