@@ -7,7 +7,7 @@ parameters:
     type: boolean
     default: false
 jobs:
-  step-1-1:
+  trigger-workflow-2:
     docker:
       - image: circleci/ruby:2.6.3
     steps:
