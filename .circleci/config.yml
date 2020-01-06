@@ -1,14 +1,41 @@
-version: 2
+version: 2.1
+parameters:
+  run_workflow1:
+    type: boolean
+    default: true
+  run_workflow2:
+    type: boolean
+    default: false
 jobs:
   step-1-1:
     docker:
-      - image: circleci/ruby:2.3.3-node-browsers
+      - image: circleci/ruby:2.6.3
     steps:
-      - checkout
-      - run: echo "Step 1.1"
+      - run:
+          name: Triggering workflow 2 only
+          command: |-
+            curl -i \
+              -H "Circle-Token: $CIRCLECI_API_TOKEN"
+              -H 'Content-Type: application/json' \
+              -H 'Accept: application/json' \
+              -X POST 
+              -d "{\"branch\":\"$CIRCLE_BRANCH\",\"parameters\":{\"run_workflow1\":false,\"run_workflow2\":true}}"
+              https://circleci.com/api/v2/project/gh/appfolio/circleci_workflow_demo/pipeline
+            
+  run-something:
+    docker:
+      - image: circleci/ruby:2.6.3
+    steps:
+      - run: echo "Run something"
+    
 
 workflows:
-  version: 2
-  build-and-deploy:
+  workflow1:
+    when: << pipeline.parameters.run_workflow1 >>
     jobs:
-      - step-1-1
+      - trigger-workflow-2:
+          context: appfolio_test_context2
+  workflow2:
+    when: << pipeline.parameters.run_workflow2 >>
+    jobs:
+      - run-something
